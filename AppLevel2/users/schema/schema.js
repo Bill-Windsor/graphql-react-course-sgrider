@@ -27,7 +27,9 @@ const UserType = new GraphQLObjectType( {
 		firstName: { type: GraphQLString },
 		age: { type: GraphQLInt },
 // Now: associate the Company with the user
-// *Note: we treat associations between Types ('CompanyType' and 'UserType') exactly as though it were another field. This traverses the graph among associations. The 'resolve' function indicates to GraphQL how to associate a Company with a given User.
+// *Note: we treat associations between Types ('CompanyType' and 'UserType') exactly as though it were another field. 
+// This traverses the graph among associations. The 'resolve' function indicates to GraphQL how to associate 
+// a Company with a given User.
 		company: {
 			type: CompanyType,
 			resolve(parentValue, args) {
@@ -47,7 +49,8 @@ const RootQuery = new GraphQLObjectType( {
 			args: { id: { type: GraphQLString } },
 
 // 'resolve' (below) returns the data from our data store
-// 'args' object below includes arguments passed into the original query; e.g., if our object expects 'id' argument to locate user, then 'id' will be present on the 'args' object
+// 'args' object below includes arguments passed into the original query; e.g., if our object expects 'id' argument 
+// to locate user, then 'id' will be present on the 'args' object
 			resolve(parentValue, args) {
 				return axios.get(`http://localhost:3000/users/${args.id}`)
 					.then(resp => resp.data);
